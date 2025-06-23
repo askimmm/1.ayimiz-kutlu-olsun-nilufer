@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1. Ayımız Kutlu Olsun Aşkım</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated hearts background */
+        .heart-bg {
+            position: absolute;
+            color: rgba(255, 182, 193, 0.3);
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .heart-bg:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .heart-bg:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; }
+        .heart-bg:nth-child(3) { top: 60%; left: 5%; animation-delay: 2s; }
+        .heart-bg:nth-child(4) { top: 70%; right: 15%; animation-delay: 3s; }
+        .heart-bg:nth-child(5) { top: 30%; left: 80%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 182, 193, 0.1), transparent);
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5em;
+            color: #d63384;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .heart-button {
+            background: linear-gradient(135deg, #ff6b9d, #ffa8c0);
+            border: none;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            font-size: 3em;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 30px rgba(255, 107, 157, 0.4);
+            margin: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .heart-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 40px rgba(255, 107, 157, 0.6);
+        }
+
+        .heart-button:active {
+            transform: scale(0.95);
+        }
+
+        .content-area {
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .photo-container {
+            position: relative;
+            margin: 20px 0;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.5s ease;
+        }
+
+        .photo-container.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .photo {
+            max-width: 300px;
+            max-height: 250px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border: 5px solid #fff;
+        }
+
+        .video {
+            max-width: 300px;
+            max-height: 250px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border: 5px solid #fff;
+        }
+
+        .message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8em;
+            color: #d63384;
+            margin-top: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sparkle {
+            position: absolute;
+            color: #ffd700;
+            font-size: 20px;
+            animation: sparkle 1s ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 1; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+
+        .instruction {
+            font-size: 0.9em;
+            color: #999;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 20px;
+            }
+            
+            .title {
+                font-size: 2em;
+            }
+            
+            .heart-button {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5em;
+            }
+            
+            .photo {
+                max-width: 250px;
+                max-height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts background -->
+    <div class="heart-bg">💖</div>
+    <div class="heart-bg">💕</div>
+    <div class="heart-bg">💖</div>
+    <div class="heart-bg">💕</div>
+    <div class="heart-bg">💖</div>
+
+    <div class="container">
+        <h1 class="title">Nilüfer ❤️</h1>
+        <p class="subtitle"></p>
+        
+        <button class="heart-button" id="heartBtn" onclick="showNext()">💖</button>
+        
+        <div class="content-area" id="contentArea">
+            <p class="instruction">Kalp butonuna bas aşkım 💕</p>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const steps = [
+            {
+                type: 'photo',
+                src: 'foto1.jpg', 
+                message: '1. Ayımız Kutlu Olsun Aşkım 💕'
+            },
+            {
+                type: 'photo',
+                src: 'foto2.jpg', 
+                message: 'Seni Herşeyden Çok Seviyorum 💖'
+            },
+            {
+                type: 'video',
+                src: 'video3.mp4', 
+                message: 'Sonsuza Kadar Beraber Olmamız Dileğiyle 💫'
+            }
+        ];
+
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+
+        function showNext() {
+            const contentArea = document.getElementById('contentArea');
+            const heartBtn = document.getElementById('heartBtn');
+            const rect = heartBtn.getBoundingClientRect();
+            
+            // Sparkle effect
+            createSparkle(rect.left + rect.width/2, rect.top + rect.height/2);
+            
+            if (currentStep < steps.length) {
+                const step = steps[currentStep];
+                
+                contentArea.innerHTML = `
+                    <div class="photo-container show">
+                        ${step.type === 'photo' ? 
+                            `<img src="${step.src}" alt="Fotoğraf" class="photo">` :
+                            `<video src="${step.src}" controls class="video"></video>`
+                        }
+                        <div class="message">${step.message}</div>
+                    </div>
+                `;
+                
+                currentStep++;
+                
+                if (currentStep >= steps.length) {
+                    setTimeout(() => {
+                        heartBtn.style.display = 'none';
+                        contentArea.innerHTML += `
+                            <div style="margin-top: 30px; font-family: 'Dancing Script', cursive; font-size: 1.5em; color: #d63384;">
+                                Seni Seviyorum Askım 💕<br>
+                                <small style="font-size: 0.8em; color: #999;">Ve Her Zaman Seveceğim.</small>
+                            </div>
+                        `;
+                    }, 2000);
+                }
+            }
+        }
+
+        // Add click effect to button
+        document.getElementById('heartBtn').addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.6);
+                transform: scale(0);
+                animation: ripple 0.6s ease-out;
+                left: ${x}px;
+                top: ${y}px;
+                width: ${size}px;
+                height: ${size}px;
+            `;
+            
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to { transform: scale(2); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
